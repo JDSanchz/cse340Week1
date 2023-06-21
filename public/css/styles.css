@@ -295,3 +295,53 @@ footer {
     font-size: 13px;
   }
 }
+
+
+#inv-display {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 30px;
+  padding: 30px;
+  min-height: 900px;
+}
+
+#inv-display li {
+  list-style: none;
+  height: 240px; /* Adjust the height as needed */
+}
+
+#inv-display li > a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  text-decoration: none;
+}
+
+#inv-display li > a img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.namePrice {
+  margin-top: 10px;
+}
+
+.namePrice hr {
+  margin: 10px 0;
+}
+
+.namePrice h2 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.namePrice span {
+  font-weight: bold;
+  color: #ff6600;
+}
+
+
