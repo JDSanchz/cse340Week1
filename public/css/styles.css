@@ -398,3 +398,135 @@ p {
     margin-right: 0;
   }
 }
+/*LOGIN VIEW*/
+/*_____________*/
+.login_p {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+}
+
+.login_p h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.login_p form {
+  margin-top: 20px;
+}
+
+.login_p label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.login_p input[type="email"],
+.login_p input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.login_p button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #284080;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.login_p button[type="submit"]:hover {
+  background-color: #273867;
+}
+
+.login_p p {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.login_p p a {
+  color: #2d3686;
+  text-decoration: none;
+}
+
+
+/*REGISTER VIEW*/
+/*_____________*/
+.register_p {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.register_p form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register_p label {
+  margin-bottom: 8px;
+  font-weight: bold;
+  display: block;
+  text-align: left; /* Add this line to left-align the labels */
+}
+
+.register_p input,
+.register_p button {
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.register_p button {
+  background-color: #975723;
+  color: #fff;
+  cursor: pointer;
+}
+
+.register_p button:hover {
+  background-color: #693d19;
+}
+
+.register_p p {
+  text-align: center;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 40px;
+}
+
+.password-wrapper button {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  color: #000000;
+  cursor: pointer;
+}
+
+.password-wrapper button:hover {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+}
