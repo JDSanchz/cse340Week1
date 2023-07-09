@@ -68,6 +68,21 @@ nav ul li a:hover {
   background-color: #9dceff; 
   color: #000000;
 }
+@media (max-width: 480px) {
+  /* Navigation styles */
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav ul li {
+    margin: 10px 0;
+  }
+
+  nav ul li a {
+    padding: 10px;
+    font-size: 16px;
+  }
+}
 
 
 /* Footer styles */
@@ -360,10 +375,14 @@ footer {
   margin-bottom: 20px;
 }
 
-.image {
+.content {
   display: flex;
-  justify-content: center; /* Align image horizontally in the center */
-  margin-bottom: 20px;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.image {
+  margin-right: 20px;
 }
 
 img {
@@ -372,8 +391,8 @@ img {
 }
 
 .info {
-  float: none;
-  text-align: center;
+  flex-grow: 1;
+  text-align: left;
 }
 
 h1 {
@@ -383,21 +402,28 @@ h1 {
 }
 
 .info p {
-  text-align: left;
-  margin-left: 10px;
+  margin: 0;
+  margin-bottom: 8px;
 }
 
 p {
   font-size: 16px;
   color: #555;
-  margin-bottom: 8px;
 }
 
 @media (max-width: 767px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+  }
+  
   .image {
     margin-right: 0;
+    margin-bottom: 20px;
   }
 }
+
+
 /*LOGIN VIEW*/
 /*_____________*/
 .login_p {
@@ -529,4 +555,199 @@ p {
   border: none;
   color: #ffffff;
   cursor: pointer;
+}
+
+/*Management View
+*/
+
+.management {
+  text-align: center;
+  margin-top: 20px;
+  min-height: 150px;
+}
+
+.management h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+.management .notice {
+  list-style: none;
+  padding: 10px;
+  background-color: #f2dede;
+  color: #a94442;
+  border: 1px solid #ebccd1;
+  border-radius: 4px;
+  margin: 20px auto;
+  max-width: 400px;
+}
+
+.management .notice li {
+  margin-bottom: 5px;
+}
+
+.management a {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #337ab7;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.management a:hover {
+  background-color: #23527c;
+}
+
+@media (max-width: 480px) {
+  .management {
+    min-height: auto;
+  }
+
+  .management h1 {
+    font-size: 20px;
+  }
+
+  .management .notice {
+    max-width: 300px;
+  }
+}
+
+/*Classification View
+*/
+
+.classview {
+  text-align: center;
+  margin-top: 20px;
+  min-height: 150px;
+}
+
+.classview h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+.classview .notice {
+  list-style: none;
+  padding: 10px;
+  background-color: #f2dede;
+  color: #a94442;
+  border: 1px solid #ebccd1;
+  border-radius: 4px;
+  margin: 20px auto;
+  max-width: 400px;
+}
+
+.classview .notice li {
+  margin-bottom: 5px;
+}
+
+.classview input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.classview button[type="submit"] {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #337ab7;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.classview button[type="submit"]:hover {
+  background-color: #23527c;
+}
+
+.classview .error {
+  color: #a94442;
+}
+
+@media (max-width: 480px) {
+  .classview {
+    min-height: auto;
+  }
+
+  .classview h1 {
+    font-size: 20px;
+  }
+
+  .classview .notice {
+    max-width: 300px;
+  }
+}
+
+
+/*More Inventory
+*/
+
+.add-inventory {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.add-inventory h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+.add-inventory .notice {
+  list-style: none;
+  padding: 10px;
+  background-color: #f2dede;
+  color: #a94442;
+  border: 1px solid #ebccd1;
+  border-radius: 4px;
+  margin: 20px auto;
+  max-width: 400px;
+}
+
+.add-inventory .notice li {
+  margin-bottom: 5px;
+}
+
+.add-inventory form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.add-inventory form div {
+  margin-bottom: 10px;
+}
+
+.add-inventory label {
+  font-weight: bold;
+}
+
+.add-inventory input[type="text"],
+.add-inventory input[type="number"],
+.add-inventory textarea,
+.add-inventory select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.add-inventory button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #337ab7;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-inventory button[type="submit"]:hover {
+  background-color: #23527c;
 }

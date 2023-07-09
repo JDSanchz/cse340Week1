@@ -1,0 +1,49 @@
+<div class="classview">
+<h1><%= title %></h1>
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<form action="/inv/add-classification" method="POST" onsubmit="return validateForm()">
+    <div>
+      <label for="classificationName">Classification Name:</label>
+      <input type="text" id="classificationName" name="classification_name" required value="<%= locals.classification_name %>">
+      <span id="classificationNameError" class="error"></span>
+    </div>
+    <div>
+      <button type="submit">Add Classification</button>
+    </div>
+  </form>
+</div>
+
+  <script>
+    function validateForm() {
+      // Get the classification name input value
+      var classificationName = document.getElementById("classificationName").value;
+  
+      // Regular expression pattern to match against
+      var pattern = /^[a-zA-Z0-9]+$/;
+  
+      // Check if the classification name contains any spaces or special characters
+      if (!pattern.test(classificationName)) {
+        // Display an error message
+        document.getElementById("classificationNameError").textContent = "Invalid classification name. Only alphanumeric characters are allowed.";
+        
+        // Prevent form submission
+        return false;
+      }
+  
+      // Clear any existing error messages
+      document.getElementById("classificationNameError").textContent = "";
+  
+      // Allow form submission
+      return true;
+    }
+  </script>
+  
