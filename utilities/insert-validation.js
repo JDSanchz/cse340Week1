@@ -83,13 +83,11 @@ insertValidate.newInvRules = () => {
         .isNumeric()
         .withMessage("Price must be a number."),
         
-      body("inv_miles")
+        body("inv_miles")
         .trim()
-        .notEmpty()
-        .withMessage("Miles is required.")
-        .isNumeric()
-        .withMessage("Miles must be a number."),
-        
+        .notEmpty().withMessage("Miles is required.")
+        .isInt().withMessage("Miles must be an integer."),
+      
       body("inv_color")
         .trim()
         .notEmpty()
@@ -99,17 +97,22 @@ insertValidate.newInvRules = () => {
     ];
   };
   
-  insertValidate.checkInventoryP = (req, res, next) => {
+  insertValidate.checkInventoryP = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      let nav = await utilities.getNav();
+      const classifications = await invModel.getClassificationsSelect();
       res.render("inventory/add-inventory", {
         title: "Add Inventory",
         nav,
-        errors: errors.array(),
+        classifications,
+        errors,
+        locals: req.body, // Include req.body as the locals to retain the form values
       });
       return;
     }
     next();
   };
+  
 
 module.exports = insertValidate;
