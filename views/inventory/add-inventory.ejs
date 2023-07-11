@@ -30,11 +30,13 @@
         <div>
           <label for="inv_classification">Classification:</label>
           <select id="inv_classification" name="inv_classification" required>
+            <option value="" disabled selected>Select classification</option> <!-- Placeholder option -->
             <% classifications.forEach(classification => { %>
               <option value="<%= classification.classification_id %>" <%= classification.classification_id === locals.inv_classification ? 'selected' : '' %>><%= classification.classification_name %></option>
             <% }) %>
           </select>
         </div>
+        
         <div>
             <label for="inv_image">Image Path:</label>
             <input type="text" id="inv_image" name="inv_image" required value="/images/vehicles/no-image.png">
