@@ -13,6 +13,13 @@ router.get("/add-classification", utilities.handleErrors(invController.renderCla
 // Add Classification view route
 router.get("/add-inventory", utilities.handleErrors(invController.renderMoreInventoryView));
 
+// New route to get inventory based on classification_id
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
+
+// Add route for editing inventory
+router.get("/edit/:inv_id", utilities.handleErrors(invController.renderEditInventoryView));
+
+
 router.post(
     "/add-classification",
     insertValidate.classificationRules(),

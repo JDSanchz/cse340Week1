@@ -37,9 +37,12 @@ invCont.getInventoryItemDetail = async function (req, res, next) {
 invCont.renderManagementView = async function (req, res, next) {
   try {
     let nav = await utilities.getNav();
+    const classificationSelect = await invModel.getClassificationsSelect();
+
     res.render("inventory/management", {
       title: "Inventory Management",
       nav: nav,
+      classificationSelect: classificationSelect,
       errors: null,
     });
   } catch (error) {
@@ -164,6 +167,55 @@ invCont.invInsertion = async (req, res, next) => {
     });
   }
 };
+
+/* ***************************
+ *  Return Inventory by Classification As JSON
+ * ************************** */
+invCont.getInventoryJSON = async (req, res, next) => {
+  const classification_id = parseInt(req.params.classification_id)
+  const invData = await invModel.getInventoryByClassificationId(classification_id)
+  if (invData[0].inv_id) {
+    return res.json(invData)
+  } else {
+    next(new Error("No data returned"))
+  }
+}
+
+/* ***************************
+ *  Build edit inventory view
+ * ************************** */
+invCont.renderEditInventoryView = async function (req, res, next) {
+  try {
+    const inv_id = parseInt(req.params.inv_id)
+    console.log(inv_id)
+    let nav = await utilities.getNav()
+    const itemData = await invModel.getVehicleById(inv_id)
+    const classifications = await invModel.getClassificationsSelect()
+    console.log(itemData)
+    const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+    res.render("./inventory/edit-inventory", {
+      title: "Edit " + itemName,
+      nav,
+      classifications: classifications,
+      errors: null,
+      inv_id: itemData.inv_id,
+      inv_make: itemData.inv_make,
+      inv_model: itemData.inv_model,
+      inv_year: itemData.inv_year,
+      inv_description: itemData.inv_description,
+      inv_image: itemData.inv_image,
+      inv_thumbnail: itemData.inv_thumbnail,
+      inv_price: itemData.inv_price,
+      inv_miles: itemData.inv_miles,
+      inv_color: itemData.inv_color,
+      classification_id: itemData.classification_id
+    })
+  } catch (error) {
+    console.error("Error rendering edit inventory view:", error);
+    next({ status: 500, message: "Internal Server Error" });
+  }
+}
+
 
 
 module.exports = invCont

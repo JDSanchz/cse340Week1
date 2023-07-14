@@ -751,3 +751,93 @@ p {
 .add-inventory button[type="submit"]:hover {
   background-color: #23527c;
 }
+
+
+/*Edit Inventory
+*/
+/* Global styles */
+.edit-inventory {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.edit-inventory h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.edit-inventory ul.notice {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.edit-inventory ul.notice li {
+  color: red;
+}
+
+.edit-inventory form {
+  margin-top: 20px;
+}
+
+.edit-inventory form div {
+  margin-bottom: 15px;
+}
+
+.edit-inventory label {
+  display: block;
+  font-weight: bold;
+}
+
+.edit-inventory input[type="text"],
+.edit-inventory input[type="number"],
+.edit-inventory textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-inventory select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-inventory button {
+  padding: 8px 16px;
+  background-color: #1d646d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-inventory button:hover {
+  background-color: #113f46;
+}
+
+/* Media queries for phone view */
+@media (max-width: 600px) {
+  .edit-inventory h1 {
+    font-size: 20px;
+  }
+  
+  .edit-inventory label {
+    font-size: 14px;
+  }
+  
+  .edit-inventory input[type="text"],
+  .edit-inventory input[type="number"],
+  .edit-inventory textarea,
+  .edit-inventory select {
+    font-size: 14px;
+  }
+  
+  .edit-inventory button {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+}
