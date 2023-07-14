@@ -114,5 +114,99 @@ insertValidate.newInvRules = () => {
     next();
   };
   
+  insertValidate.EditInvRules = () => {
+    return [
+      // Add validation rules for each input field in the form
+      body("inv_make")
+        .trim()
+        .notEmpty()
+        .withMessage("Make is required."),
+        
+      body("inv_model")
+        .trim()
+        .notEmpty()
+        .withMessage("Model is required."),
+        
+      body("inv_year")
+        .trim()
+        .notEmpty()
+        .withMessage("Year is required.")
+        .isNumeric()
+        .withMessage("Year must be a number."),
+        
+      body("inv_description")
+        .trim()
+        .notEmpty()
+        .withMessage("Description is required."),
+        
+      body("classification_id")
+        .trim()
+        .notEmpty()
+        .withMessage("Classification is required."),
+        
+      body("inv_image")
+        .trim()
+        .notEmpty()
+        .withMessage("Image Path is required."),
+        
+      body("inv_thumbnail")
+        .trim()
+        .notEmpty()
+        .withMessage("Thumbnail Path is required."),
+        
+      body("inv_price")
+        .trim()
+        .notEmpty()
+        .withMessage("Price is required.")
+        .isNumeric()
+        .withMessage("Price must be a number."),
+        
+        body("inv_miles")
+        .trim()
+        .notEmpty().withMessage("Miles is required.")
+        .isInt().withMessage("Miles must be an integer."),
+      
+      body("inv_color")
+        .trim()
+        .notEmpty()
+        .withMessage("Color is required.")
+        .matches(/^[a-zA-Z\s]+$/)
+        .withMessage("Color can only contain letters and spaces."),
+    ];
+  };
+  
+  insertValidate.EditInventoryP = async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const inv_id = req.body.inv_id;
+      const inv_idd = parseInt(req.body.inv_id)
+      console.log(inv_idd)
+      const itemData = await invModel.getVehicleById(inv_idd)
+      let nav = await utilities.getNav();
+      const classifications = await invModel.getClassificationsSelect();
+      res.render("./inventory/edit-inventory", {
+        title: "Edit Inventory",
+        nav,
+        classifications: classifications.map(classification => ({
+          ...classification,
+          selected: classification.classification_id == itemData.classification_id
+        })),
+        errors,
+        inv_id,
+        inv_make: req.body.inv_make,
+        inv_model: req.body.inv_model,
+        inv_year: req.body.inv_year,
+        inv_description: req.body.inv_description,
+        inv_image: req.body.inv_image,
+        inv_thumbnail: req.body.inv_thumbnail,
+        inv_price: req.body.inv_price,
+        inv_miles: req.body.inv_miles,
+        inv_color: req.body.inv_color,
+        classification_id: req.body.classification_id
+      });
+      return;
+    }
+    next();
+  };
 
 module.exports = insertValidate;

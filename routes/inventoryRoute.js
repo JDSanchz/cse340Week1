@@ -19,6 +19,11 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 // Add route for editing inventory
 router.get("/edit/:inv_id", utilities.handleErrors(invController.renderEditInventoryView));
 
+router.post(
+  "/update/", 
+  insertValidate.EditInvRules(),
+  insertValidate.EditInventoryP,
+  utilities.handleErrors(invController.updateInventory));
 
 router.post(
     "/add-classification",

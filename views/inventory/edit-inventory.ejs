@@ -10,7 +10,7 @@
       </ul>
     <% } %>
   
-    <form action="/inv/update" method="POST" onsubmit="return validateForm()">
+    <form id="updateForm" action="/inv/update" method="POST" onsubmit="return validateForm()">
         <div>
           <label for="inv_make">Make:</label>
           <input type="text" id="inv_make" name="inv_make" required value="<%= locals.inv_make %>">
@@ -28,22 +28,21 @@
           <textarea id="inv_description" name="inv_description" required><%= locals.inv_description %></textarea>
         </div>
         <div>
-          <label for="inv_classification">Classification:</label>
-          <select id="inv_classification" name="inv_classification" required>
-            <option value="" disabled selected>Select classification</option> <!-- Placeholder option -->
-            <% classifications.forEach(classification => { %>
-              <option value="<%= classification.classification_id %>" <%= classification.classification_id === locals.inv_classification ? 'selected' : '' %>><%= classification.classification_name %></option>
-            <% }) %>
-          </select>
-        </div>
-        
+            <label for="classification_id">Classification:</label>
+            <select id="classification_id" name="classification_id" required>
+              <option value="" disabled>Select classification</option> <!-- Placeholder option -->
+              <% classifications.forEach(classification => { %>
+                <option value="<%= classification.classification_id %>" <%= classification.selected ? 'selected' : '' %>><%= classification.classification_name %></option>
+              <% }) %>
+            </select>
+          </div>
         <div>
             <label for="inv_image">Image Path:</label>
-            <input type="text" id="inv_image" name="inv_image" required value="/images/vehicles/no-image.png">
+            <input type="text" id="inv_image" name="inv_image" required value="<%= locals.inv_image %>">
           </div>
           <div>
             <label for="inv_thumbnail">Thumbnail Path:</label>
-            <input type="text" id="inv_thumbnail" name="inv_thumbnail" required value="/images/vehicles/no-image-tn.png">
+            <input type="text" id="inv_thumbnail" name="inv_thumbnail" required value="<%= locals.inv_thumbnail %>">
           </div>          
         <div>
           <label for="inv_price">Price:</label>
@@ -58,8 +57,13 @@
           <input type="text" id="inv_color" name="inv_color" required value="<%= locals.inv_color %>">
         </div>
         <div>
-            <button type="submit">Update Vehicle</button>
+            <input type="hidden" name="inv_id"
+            <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+            <% } %>>       
+            <button type="submit" disabled>Update Vehicle</button>
         </div>
       </form>
       
   </div>
+
+  <script src="../../js/inv-update.js"></script>
