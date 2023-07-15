@@ -133,4 +133,23 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
+ Util.checkAdminOrEmployee = async (req, res, next) => {
+  if (res.locals.loggedin) {
+    const accountType = res.locals.accountData.account_type;
+    if (accountType === "Employee" || accountType === "Admin") {
+      next();
+    } else {
+       console.log(accountType)
+      await req.flash("notice", "You do not have sufficient permissions to access this resource.");
+      res.clearCookie("jwt");
+      return res.redirect("/account/login");
+    }
+  } else {
+    await req.flash("notice", "Please log in.");
+    return res.redirect("/account/login");
+  }
+}
+
+
+
 module.exports = Util

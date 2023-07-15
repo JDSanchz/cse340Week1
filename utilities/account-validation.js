@@ -104,5 +104,68 @@ validate.checkLoginData = async (req, res, next) => {
     }
     next()
   }
+
+  validate.updateAccountRules = () => {
+    return [
+      // First name is required
+      body("firstname")
+        .trim()
+        .notEmpty()
+        .withMessage("First name is required."),
+  
+      // Last name is required
+      body("lastname")
+        .trim()
+        .notEmpty()
+        .withMessage("Last name is required."),
+  
+      // Valid email is required
+      body("email")
+        .trim()
+        .isEmail()
+        .normalizeEmail()
+        .withMessage("A valid email is required."),
+    ];
+  };
+  
+  validate.checkUpdatedData = async (req, res, next) => {
+    let errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      res.render("account/update", {
+        errors,
+        title: "Account Update",
+        accountData: req.body
+      });
+      return;
+    }
+    next();
+  };
+
+  validate.updatePassRules = () => {
+    return [
+      // New password is required, must be at least 8 characters long, 
+      // and must contain at least one lowercase letter, one uppercase letter and one number
+      body("newPassword")
+        .trim()
+        .isLength({ min: 8 })
+        .withMessage("Password must be at least 8 characters long.")
+        .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/)
+        .withMessage("Password must contain at least one lowercase letter, one uppercase letter and one number.")
+    ];
+  };
+  validate.checkUpdatedPassData = async (req, res, next) => {
+    let errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      res.render("account/update", {
+        errors,
+        title: "Account Update",
+        accountData: req.body
+      });
+      return;
+    }
+    next();
+  };
+    
+  
   
   module.exports = validate

@@ -18,6 +18,7 @@ const pool = require("./database/");
 const accountRoute = require('./routes/accountRoute');
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
+const jwt = require("jsonwebtoken");
 
 /* ***********************
  * Middleware
@@ -43,6 +44,22 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 app.use(cookieParser());
 
 app.use(utilities.checkJWTToken)
+
+app.use(async (req, res, next) => {
+  try {
+    const token = req.cookies.jwt;
+    if (token) {
+      const accountData = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+      res.locals.isLoggedIn = true;
+      res.locals.username = accountData.account_firstname; // assuming accountData has a 'account_firstname' field
+    } else {
+      res.locals.isLoggedIn = false;
+    }
+  } catch (error) {
+    res.locals.isLoggedIn = false;
+  }
+  next();
+});
 /* ***********************
  * View Engine and Templates
  *************************/

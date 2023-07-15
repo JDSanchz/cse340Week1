@@ -841,3 +841,170 @@ p {
     padding: 6px 12px;
   }
 }
+
+
+.delete-confirm {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.delete-confirm h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.delete-confirm .notice {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.delete-confirm .notice li {
+  color: red;
+}
+
+.delete-confirm form div {
+  margin-bottom: 15px;
+}
+
+.delete-confirm label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.delete-confirm input[type="text"],
+.delete-confirm input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.delete-confirm p {
+  margin-bottom: 15px;
+}
+
+.delete-confirm button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-confirm button:hover {
+  background-color: #c82333;
+}
+
+
+.accMan {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+.accMan h1, .accMan h2, .accMan h3 {
+  color: #333;
+}
+
+.accMan p {
+  color: #666;
+}
+
+.accMan .notice {
+  padding: 10px;
+  background-color: #ffdd57;
+  color: #b58602;
+  list-style: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.accMan .notice li {
+  line-height: 1.6;
+}
+
+.accMan a {
+  color: #3366CC;
+  text-decoration: none;
+}
+
+.accMan a:hover {
+  text-decoration: underline;
+}
+
+.UpdView {
+  width: 80%;
+  margin: auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+.UpdView h1, .UpdView h2, .UpdView h3 {
+  color: #444;
+}
+
+.UpdView h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.UpdView h2 {
+  font-size: 1.5em;
+  margin: 20px 0px;
+}
+
+.UpdView h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.UpdView form {
+  display: flex;
+  flex-direction: column;
+}
+
+.UpdView label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.UpdView input[type="text"], .UpdView input[type="email"], .UpdView input[type="password"] {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.UpdView input[type="submit"] {
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #1962b1;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.UpdView input[type="submit"]:hover {
+  background-color: #1d436b;
+}
+
+.UpdView .notice {
+  list-style: none;
+  padding: 0;
+  color: red;
+}
+
+.UpdView .notice li {
+  margin-bottom: 10px;
+}

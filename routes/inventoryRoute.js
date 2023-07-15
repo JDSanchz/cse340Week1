@@ -5,7 +5,7 @@ const utilities = require("../utilities/index");
 const insertValidate = require('../utilities/insert-validation');
 
 // Management view route
-router.get("/", utilities.handleErrors(invController.renderManagementView));
+router.get("/", utilities.checkLogin,utilities.checkAdminOrEmployee,utilities.handleErrors(invController.renderManagementView));
 
 // Add Classification view route
 router.get("/add-classification", utilities.handleErrors(invController.renderClassificationView));
@@ -18,6 +18,13 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 
 // Add route for editing inventory
 router.get("/edit/:inv_id", utilities.handleErrors(invController.renderEditInventoryView));
+
+// GET route to deliver the delete confirmation view
+router.get("/delete/:inv_id", utilities.handleErrors(invController.renderDeleteConfirmationView));
+
+router.post(
+  "/delete/",
+  utilities.handleErrors(invController.DeleteInventory));
 
 router.post(
   "/update/", 

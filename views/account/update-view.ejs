@@ -1,0 +1,46 @@
+<div class="UpdView">
+    <h1><%= title %></h1>
+    
+    <%- messages() %>
+    <% if (errors) { %>
+      <ul class="notice">
+      <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+      </ul>
+    <% } %>
+  
+    <h2>Let's Make Some Changes</h2>
+
+    <!-- Account Update Form -->
+    <form id="accountUpdateForm" action="/account/update" method="post">
+      <h3>Account Update</h3>
+      <input type="hidden" name="accountId" value="<%= accountData.account_id %>">
+
+      <label for="firstname">First Name:</label>
+      <input type="text" id="firstname" name="firstname" value="<%= accountData.account_firstname %>" required>
+
+      <label for="lastname">Last Name:</label>
+      <input type="text" id="lastname" name="lastname" value="<%= accountData.account_lastname %>" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" value="<%= accountData.account_email %>" required>
+
+      <input type="submit" value="Update Account">
+    </form>
+
+    <!-- Change Password Form -->
+    <form id="passwordChangeForm" action="/account/update-password" method="post">
+      <h3>Change Password</h3>
+      <input type="hidden" name="accountId" value="<%= accountData.account_id %>">
+
+      <p>By entering a new password below, you will change your current password. 
+      Remember, your password must be at least 8 characters long and contain a mix of letters and numbers.</p>
+
+      <label for="newPassword">Old Password:</label>
+      <input type="password" id="oldPassword" name="oldPassword" required>
+      <label for="newPassword">New Password:</label>
+      <input type="password" id="newPassword" name="newPassword" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+      <input type="submit" value="Change Password">
+    </form>
+</div>
