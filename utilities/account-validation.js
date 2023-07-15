@@ -130,11 +130,15 @@ validate.checkLoginData = async (req, res, next) => {
   
   validate.checkUpdatedData = async (req, res, next) => {
     let errors = validationResult(req)
+    let nav = await utilities.getNav()
+    const accountId = req.body.accountId;
+    const accountData = await accountModel.getAccountById(accountId);
     if (!errors.isEmpty()) {
-      res.render("account/update", {
+      res.render("account/update-view", {
         errors,
+        nav,
         title: "Account Update",
-        accountData: req.body
+        accountData,
       });
       return;
     }
@@ -155,11 +159,15 @@ validate.checkLoginData = async (req, res, next) => {
   };
   validate.checkUpdatedPassData = async (req, res, next) => {
     let errors = validationResult(req)
+    let nav = await utilities.getNav()
+    const accountId = req.body.accountId;
+    const accountData = await accountModel.getAccountById(accountId);
     if (!errors.isEmpty()) {
-      res.render("account/update", {
+      res.render("account/update-view", {
         errors,
+        nav,
         title: "Account Update",
-        accountData: req.body
+        accountData,
       });
       return;
     }

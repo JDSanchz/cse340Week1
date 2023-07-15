@@ -241,7 +241,7 @@ async function accountUpdatePass(req, res, next) {
     // Compare the old password with the current password in the database
     if (!await bcrypt.compare(oldPassword, accountData.account_password)) {
       req.flash('notice', 'Old password is incorrect. Please try again.');
-      res.status(400).render('account/update-password', {
+      res.status(400).render('account/update-view', {
         title: 'Update Password',
         nav,
         errors: null
@@ -258,7 +258,7 @@ async function accountUpdatePass(req, res, next) {
     // If the update was unsuccessful, return to the update password view with error message
     if (!updateResult) {
       req.flash('notice', 'Password update failed. Please try again.');
-      res.status(400).render('account/update-password', {
+      res.status(400).render('account/update-view', {
         title: 'Update Password',
         nav,
         errors: null
