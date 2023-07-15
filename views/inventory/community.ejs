@@ -1,0 +1,37 @@
+<div class="community-section">
+    <h1><%= title %></h1>
+    <%- messages() %>
+
+    <% if (errors) { %>
+      <ul class="notice">
+        <% errors.array().forEach(error => { %>
+          <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+    <div class="community-content">
+      <div class="com-sec">
+        <% comments.forEach(comment => { %>
+          <div class="comment">
+            <p><%= comment.comment %></p>
+            <span>
+              <%= String(new Date(comment.created_at).getHours()).padStart(2, '0') %>:<%= String(new Date(comment.created_at).getMinutes()).padStart(2, '0') %>
+            </span>
+          </div>
+        <% }); %>
+      </div> 
+      <form action="/inv/type/<%= classificationId %>/community" method="POST">
+        <div class="comment-input">
+            <label for="comment-box">Your comment:</label>
+            <div class="input-wrapper">
+                <input type="text" id="comment-box" name="comment" placeholder="Add a comment...">
+                <button type="submit" class="submit-btn">
+                    <img src="https://cdn-icons-png.flaticon.com/512/60/60525.png" alt="Submit Logo">
+                </button>
+            </div>
+        </div>
+    </form>
+    
+    </div>
+  </div>
+  

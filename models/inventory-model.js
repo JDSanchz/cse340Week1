@@ -177,6 +177,32 @@ async function DeleteInventoryItem(inv_id) {
   }
 }
 
+async function fetchComments(classificationId) {
+  let query = `SELECT comment, created_at FROM comments WHERE classification_id = $1 ORDER BY created_at DESC LIMIT 10`;
+  try {
+    let result = await pool.query(query, [classificationId]);
+    return result.rows;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+// in invModel.js or wherever your database functions are
+async function getClassificationNameById(classificationId) {
+  const query = "SELECT classification_name FROM classification WHERE classification_id = $1";
+  const values = [classificationId];
+
+  try {
+    const result = await pool.query(query, values);
+    return result.rows[0].classification_name; // returns the name of the classification
+  } catch (err) {
+    console.error('Error executing query', err.stack);
+  }
+}
+
+
+
 module.exports = {
   getClassifications,
   insertInventory,
@@ -187,5 +213,5 @@ module.exports = {
   checkExistingClassification,
   insertClassification,
   updateInventory,
-  DeleteInventoryItem
+  DeleteInventoryItem, fetchComments,getClassificationNameById
 };

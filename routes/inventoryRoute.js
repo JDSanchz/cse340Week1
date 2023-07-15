@@ -4,6 +4,8 @@ const invController = require("../controllers/invController");
 const utilities = require("../utilities/index");
 const insertValidate = require('../utilities/insert-validation');
 
+router.get('/type/:classificationId/community', utilities.handleErrors(invController.buildCommunity));
+
 // Management view route
 router.get("/", utilities.checkLogin,utilities.checkAdminOrEmployee,utilities.handleErrors(invController.renderManagementView));
 

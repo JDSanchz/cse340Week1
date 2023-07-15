@@ -1,10 +1,14 @@
 <% if (title) { %>
-    <h1 style="text-align: center; color: #007bff;"><%= title %></h1>
-  <% } else {
-    res.redirect('/');
-  } %>
-  
-  <%# messages() %>
-  
-  <%- grid %>
-  
+  <h1 style="text-align: center; color: #007bff;"><%= title %></h1>
+<% } else {
+  res.redirect('/');
+} %>
+
+<%# messages() %>
+
+<div class="gotocommunity">
+  <a class="community-link" href="/inv/type/<%= classificationId %>/community">Check out this Community</a>
+</div>
+
+
+<%- grid %>

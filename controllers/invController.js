@@ -8,14 +8,32 @@ const invCont = {}
  * ************************** */
 invCont.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classificationId
+  console.log(classification_id)
   const data = await invModel.getInventoryByClassificationId(classification_id)
+  console.log(data)
+
+  // Check if data is empty
+  if (!data.length) {
+    const grid = '<p class="notice">Sorry, no matching vehicles could be found.</p>';
+    let nav = await utilities.getNav();
+    res.render("./inventory/classification", {
+      title: "No Vehicles",
+      nav,
+      grid,
+      classificationId: classification_id,
+    });
+    return;
+  }
+
   const grid = await utilities.buildClassificationGrid(data)
   let nav = await utilities.getNav()
   const className = data[0].classification_name
+  let classificationId = req.params.classificationId;
   res.render("./inventory/classification", {
     title: className + " vehicles",
     nav,
     grid,
+    classificationId
   })
 }
 
@@ -50,6 +68,35 @@ invCont.renderManagementView = async function (req, res, next) {
     next({ status: 500, message: "Internal Server Error" });
   }
 };
+
+invCont.buildCommunity = async function(req, res, next) {
+  try {
+    let classificationId = req.params.classificationId;
+    let nav = await utilities.getNav();
+  
+    // Fetch the comments from the database here
+    let comments = await invModel.fetchComments(classificationId);
+
+    // Fetch the classification name
+    let className = await invModel.getClassificationNameById(classificationId);
+
+    // Construct the title
+    let title = `${className} Community`;
+
+    res.render("inventory/community", {
+      title,
+      nav,
+      classificationId,
+      comments,
+      errors:null,
+    });
+  } catch (error) {
+    console.error("Error rendering this Community:", error);
+    next({ status: 500, message: "Internal Server Error" });
+  }
+};
+
+
 
 invCont.renderClassificationView = async function (req, res, next) {
   try {
@@ -375,6 +422,8 @@ invCont.updateInventory = async function (req, res, next) {
     })
   }
 }
+
+
 
 
 module.exports = invCont
