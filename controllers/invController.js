@@ -96,6 +96,43 @@ invCont.buildCommunity = async function(req, res, next) {
   }
 };
 
+invCont.sendComment = async (req, res, next) => {
+  const classificationId = req.params.classificationId;
+  const comment = req.body.comment;
+  const userId = req.body.accountId; 
+  try {
+    const result = await invModel.createComment(userId, classificationId, comment);
+
+    // Fetch comments again after successfully adding a new one
+    const comments = await invModel.fetchComments(classificationId);
+
+    // Fetch the classification name
+    let className = await invModel.getClassificationNameById(classificationId);
+
+    // Construct the title
+    let title = `${className} Community`;
+    const nav = await utilities.getNav();
+    res.render("inventory/community", {
+      title,
+      nav,
+      classificationId,
+      comments,
+      errors: null,
+    });
+  } catch (error) {
+    console.error("Error Adding Comment:", error);
+
+    req.flash("error", "There was an error sending your comment, please try again");
+    const nav = await utilities.getNav();
+    res.status(401).render("inventory/community", {
+      title: "Add Classification",
+      nav,
+      classification_name: req.body.classification_name,
+      errors: [{ msg: "There was an error sending your comment, please try again"}],
+    });
+  }
+};
+
 
 
 invCont.renderClassificationView = async function (req, res, next) {

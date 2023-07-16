@@ -209,4 +209,41 @@ insertValidate.newInvRules = () => {
     next();
   };
 
+  // Validation rules for comments
+insertValidate.checkCommentRules = () => {
+  return [
+      body("comment")
+          .trim()
+          .notEmpty()
+          .withMessage("Comment is required 😳")
+          .isLength({ max: 30 })
+          .withMessage("Comment must not exceed 30 characters 😠"),
+  ];
+};
+
+
+insertValidate.commentRules = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    // If there are validation errors, re-render the form with error messages
+    let nav = await utilities.getNav();
+    const classificationId = req.params.classificationId;
+    const title = req.body.title; // Assuming you are passing the title in the form data
+
+    // Fetch comments
+    const comments = await invModel.fetchComments(classificationId);
+
+    res.render("inventory/community", { // Replace "community" with your correct path to the form template
+      title,
+      nav,
+      errors,
+      classificationId,
+      comments,
+      comment: req.body.comment
+    });
+    return;
+  }
+  next();
+};
+
 module.exports = insertValidate;

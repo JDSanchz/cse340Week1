@@ -200,7 +200,17 @@ async function getClassificationNameById(classificationId) {
     console.error('Error executing query', err.stack);
   }
 }
-
+async function createComment(userId, classificationId, comment) {
+  try {
+    const query = `INSERT INTO comments (account_id, classification_id, comment, created_at) VALUES ($1, $2, $3, $4)`;
+    const values = [userId, classificationId, comment, new Date()];
+    const result = await pool.query(query, values);
+    return result;
+  } catch (error) {
+    console.error('Error creating comment:', error);
+    throw error;
+  }
+}
 
 
 module.exports = {
@@ -213,5 +223,5 @@ module.exports = {
   checkExistingClassification,
   insertClassification,
   updateInventory,
-  DeleteInventoryItem, fetchComments,getClassificationNameById
+  DeleteInventoryItem, fetchComments,getClassificationNameById,createComment
 };

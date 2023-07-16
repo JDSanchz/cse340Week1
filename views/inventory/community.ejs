@@ -24,7 +24,8 @@
         <div class="comment-input">
             <label for="comment-box">Your comment:</label>
             <div class="input-wrapper">
-                <input type="text" id="comment-box" name="comment" placeholder="Add a comment...">
+              <input type="hidden" name="accountId" value="<%= accountData.account_id %>">
+                <input type="text" id="comment-box" name="comment" placeholder="Add a comment..." required>
                 <button type="submit" class="submit-btn">
                     <img src="https://cdn-icons-png.flaticon.com/512/60/60525.png" alt="Submit Logo">
                 </button>

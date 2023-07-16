@@ -4,7 +4,7 @@ const invController = require("../controllers/invController");
 const utilities = require("../utilities/index");
 const insertValidate = require('../utilities/insert-validation');
 
-router.get('/type/:classificationId/community', utilities.handleErrors(invController.buildCommunity));
+router.get('/type/:classificationId/community', utilities.checkLogin, utilities.handleErrors(invController.buildCommunity));
 
 // Management view route
 router.get("/", utilities.checkLogin,utilities.checkAdminOrEmployee,utilities.handleErrors(invController.renderManagementView));
@@ -33,6 +33,12 @@ router.post(
   insertValidate.EditInvRules(),
   insertValidate.EditInventoryP,
   utilities.handleErrors(invController.updateInventory));
+
+  router.post(
+    '/type/:classificationId/community', 
+    insertValidate.checkCommentRules(),
+    insertValidate.commentRules,
+    utilities.handleErrors(invController.sendComment));
 
 router.post(
     "/add-classification",
