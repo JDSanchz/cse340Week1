@@ -1,0 +1,78 @@
+
+  
+ 
+  /* Styles for the form */
+  
+  .community-section form {
+    width: 45%; /* Adjusted to account for the space-between */
+  }
+  
+  .comment-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .comment-input label {
+    margin-bottom: 5px;
+  }
+  
+  .input-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  #comment-box {
+    flex: 1;
+    margin-right: 10px;
+    padding: 5px;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  #comment-box:hover,
+  #comment-box:focus {
+    background-color: #fff1b4;
+    color: #9c6b00;
+  }
+  
+  .input-wrapper .submit-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer; 
+  }
+  
+  .input-wrapper .submit-btn:hover {
+    opacity: 0.5;
+  }
+  
+  .input-wrapper .submit-btn img {
+    height: 15px;
+    width: auto;
+  }
+  @media (max-width: 600px) {  
+    .community-section {
+      width: 90%;  
+    }
+  
+    .community-content {
+      flex-direction: column;  
+    }
+  
+    .com-sec, form {
+      width: 100%;
+    }
+  
+    .input-wrapper {
+      flex-direction: column; 
+    }
+  
+    .input-wrapper #comment-box {
+      margin-right: 0;  
+    }
+  
+    .input-wrapper .submit-btn {
+      margin-top: 10px;  
+    }
+  } 
+  
